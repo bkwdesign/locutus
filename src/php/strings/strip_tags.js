@@ -31,6 +31,9 @@ module.exports = function strip_tags (input, allowed) { // eslint-disable-line c
   //   returns 6: '1 <br/> 1'
   //   example 7: strip_tags('1 <br/> 1', '<br><br/>')
   //   returns 7: '1 <br/> 1'
+  
+  // ensure tables have line-returns between rows and tabbed delmited TD's..
+  input = input.replace(/<\/td>/gi, "\t").replace(/<\/tr>/gi,"\n");
 
   // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
   allowed = (((allowed || '') + '').toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('')
